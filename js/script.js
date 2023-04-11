@@ -1,4 +1,5 @@
 var searchFormEl = document.querySelector('#search-form');
+var apiKey = 'c729ec46d49e9a4421698491ae355b48';
 
 function handleSearchFormSubmit(event) {
     event.preventDefault();
@@ -9,7 +10,7 @@ function handleSearchFormSubmit(event) {
         console.error('You have not searched for your city!');
         return;
     }
-    var queryString = './search-results.html?q=' + searchInputVal;
+    var queryString = './weather?q=' + searchInputVal + '&appid' + apiKey
 
     location.assign(queryString);
 }
