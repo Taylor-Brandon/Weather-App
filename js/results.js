@@ -1,14 +1,24 @@
-var results = document.querySelector('#result-text');
+var resultTextEl = document.querySelector('#result-text');
 var resultContentEl = document.querySelector('#result-content');
 var searchFormEl = document.querySelector('#search-form');
 
 function getParams () {
     var searchParamsArr = document.location.search.split('&');
 
-    var query = searchParamsArr[0].split('=').pop();
-    var key = searchParamsArr[1].split('=').pop();
+    var query = searchParamsArr.find(function(param) {
+        return param.includes('?q=')
+    });
+    var key = searchParamsArr.find(function(param) {
+        return param.includes('appid=');
+    });
+    if(!query || key) {
+        console.log('You are missing a parameter!')
+        return;
+    }
+    var queryEl = query.split('=').pop();
+    var appidEl = query.split('=').pop();
 
-    searchApi(query, key);
+    searchApi(queryEl, appidEl);
 }
 
 function printResults(resultObj) {
@@ -53,14 +63,14 @@ function printResults(resultObj) {
   resultContentEl.append(resultCard);
 }
 
-function searchApi(query, key) {
-    var localQueryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=search&appid=c729ec46d49e9a4421698491ae355b48'
+function searchApi(queryEl, appidEl) {
+    var localQueryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + queryEl + '&appid=' + appidEl;
 
-    if (format) {
-        localQueryUrl = 'https://api.openweathermap.org/data/2.5/weather?' + query;
+    if (queryEl) {
+        localQueryUrl = 'https://api.openweathermap.org/data/2.5/weather?' + queryEl;
     }
 
-    localQueryUrl = localQueryUrl + '&appid=' + key;
+    localQueryUrl = localQueryUrl + '&appid=' + appidEl;
 
    fetch(localQueryUrl)
    .then(function (response) {
@@ -70,7 +80,7 @@ function searchApi(query, key) {
     return response.json();
    })
    .then(function (locRes) {
-    resultTextEl.textContent = locRes.search.query;
+    resultTextEl.textContent = locRes.search.queryEl;
 
     console.log(locRes);
 
@@ -80,7 +90,7 @@ function searchApi(query, key) {
     } else {
         resultContentEl.textContent = '';
         for (var i = 0; i < locRes.results.length; i++) {
-            printResults(locRes.result[i]);
+            printResults(locRes.resultso[i]);
         }
     }
    })
