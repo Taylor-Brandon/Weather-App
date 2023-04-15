@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    
+}
+body {
+    background-image: linear-gradient(to right, rgb(98, 98, 240), rgb(37, 37, 222), rgb(52, 3, 122));
+}
+    
+.box{
+    background-color: azure;
+    color: rgb(70, 70, 235);
+    border: 2px solid #8ab4f2be;
+    border-radius: 10px;
+    padding: 5px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 300px;
+    margin-left: 200px;
+}
+
+form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+button {
+    border: rgb(150, 150, 238);
+}
