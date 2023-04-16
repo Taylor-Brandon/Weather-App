@@ -1,0 +1,24 @@
+nav {
+    background-image: linear-gradient(to right, rgb(98, 98, 240), rgb(37, 37, 222), rgb(52, 3, 122));
+    margin-top: 5px;
+    text-align: center;
+    color: aliceblue;
+
+}
+h2{
+    margin-left: -50px;
+}
+
+form {
+    margin-left: -50px;
+    color: black;
+}
+button {
+    height: 40px;
+    width: 100px;
+}
+#buttons {
+    justify-content: left;
+    margin-top: 100px;
+    margin-left: -270px;
+}

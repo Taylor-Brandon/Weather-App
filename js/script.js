@@ -7,7 +7,7 @@ function handleSearchFormSubmit(event) {
     var searchInputVal = document.querySelector('#search-input').value;
 
     if (!searchInputVal) {
-        alert('You have not searched for your city!');
+        alert('You have not searched for a city!');
         return;
     }
     var queryString = './weather-results.html?q=' + searchInputVal + '&appid=' + apiKey;
