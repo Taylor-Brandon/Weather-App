@@ -7,10 +7,10 @@ function handleSearchFormSubmit(event) {
     var searchInputVal = document.querySelector('#search-input').value;
 
     if (!searchInputVal) {
-        console.error('You have not searched for your city!');
+        alert('You have not searched for your city!');
         return;
     }
-    var queryString = './weather?q=' + searchInputVal + '&appid' + apiKey
+    var queryString = './weather-results.html?q=' + searchInputVal + '&appid=' + apiKey;
 
     location.assign(queryString);
 }
