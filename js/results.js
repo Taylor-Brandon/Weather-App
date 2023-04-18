@@ -127,8 +127,9 @@ function handleSearchFormSubmit(event) {
   if (!searchInputVal) {
     console.error('You need a search input value!');
     return;
+
+  };
   }
-}
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 

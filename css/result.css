@@ -7,6 +7,12 @@ nav {
 }
 h2{
     margin-left: -50px;
+    color: black;
+}
+.card-body{
+    height: 300px;
+    width: fit-content;
+    background-color: rgb(58, 53, 103);
 }
 
 form {
