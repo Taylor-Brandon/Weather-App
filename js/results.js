@@ -94,7 +94,7 @@ function searchApi(query, appid) {
         resultContentEl.textContent = '';
         printResult(locRes);
 
-        var fiveDayForecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + query + '&appid=' + appid;
+        var fiveDayForecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + query + '&cnt=5' + '&appid=' + appid;
 
 
         fetch(fiveDayForecastUrl)
