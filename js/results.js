@@ -56,8 +56,12 @@ function displayFiveDayForecast(forecastObj) {
 
     var forecastBody = document.createElement('div');
     forecastBody.classList.add('card-body');
+    
     forecastCard.append(forecastBody);
 
+    var weatherIconEl = document.createElement('img');
+    weatherIconEl.src = 'https://openweathermap.org/img/w/' + forecastObj.list[i].weather[0].icon + '.png';
+    weatherIconEl.alt = forecastObj.list[i].weather[0].icon;
 
     var forecastContentEl = document.createElement('ul');
     forecastContentEl.innerHTML =
@@ -67,7 +71,7 @@ function displayFiveDayForecast(forecastObj) {
       '<li>Humidity:</li> ' + forecastObj.list[i].main.humidity + '%<br/>' +
       '<li>Wind Speed:</li> ' + forecastObj.list[i].wind.speed + ' m/s<br/>';
     
-    forecastBody.append(forecastContentEl);
+    forecastBody.append(forecastContentEl, weatherIconEl);
     forecastContainer.append(forecastCard);
   }
   resultContentEl.append(forecastContainer);
