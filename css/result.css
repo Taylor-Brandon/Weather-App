@@ -11,8 +11,7 @@ h2{
 }
 .card-body{
     height: 300px;
-    width: fit-content;
-    background-color: rgb(58, 53, 103);
+    width: 500px;
 }
 
 form {

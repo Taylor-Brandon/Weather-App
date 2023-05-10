@@ -28,6 +28,10 @@ function printResult(resultObj) {
   var titleEl = document.createElement('h3');
   titleEl.textContent = resultObj.name;
 
+  var weatherIconEl = document.createElement('img');
+  weatherIconEl.src = 'https://openweathermap.org/img/w/' + resultObj.weather[0].icon + '.png';
+  weatherIconEl.alt = resultObj.weather[0].description;
+
   var bodyContentEl = document.createElement('ul');
   bodyContentEl.innerHTML =
     '<li>Date:</li>' + new Date(resultObj.dt * 1000) + '<br/>' +
@@ -36,7 +40,7 @@ function printResult(resultObj) {
     '<li>Humidity:</li> ' + resultObj.main.humidity + '%<br/>' +
     '<li>Wind Speed:</li> ' + resultObj.wind.speed + ' m/s<br/>';
 
-  resultBody.append(titleEl, bodyContentEl);
+  resultBody.append(titleEl, weatherIconEl, bodyContentEl);
   resultContentEl.append(resultCard);
 }
 
@@ -53,6 +57,7 @@ function displayFiveDayForecast(forecastObj) {
     var forecastBody = document.createElement('div');
     forecastBody.classList.add('card-body');
     forecastCard.append(forecastBody);
+
 
     var forecastContentEl = document.createElement('ul');
     forecastContentEl.innerHTML =
@@ -129,7 +134,7 @@ function handleSearchFormSubmit(event) {
     return;
 
   };
-  }
+}
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 
