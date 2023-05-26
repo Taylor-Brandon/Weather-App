@@ -1,6 +1,8 @@
 var resultTextEl = document.querySelector('#result-text');
 var resultContentEl = document.querySelector('#result-content');
 var searchFormEl = document.querySelector('#search-form');
+var searchHistoryEl = document.querySelector('#search-history');
+var apiKey = 'c729ec46d49e9a4421698491ae355b48';
 
 function getParams() {
   var searchParamsArr = document.location.search.split('&');
@@ -50,13 +52,13 @@ function displayFiveDayForecast(forecastObj) {
   var forecastContainer = document.createElement('div');
   forecastContainer.classList.add('forecast-container');
 
-  for(var i = 0; i < forecastObj.list.length; i++) {
+  for (var i = 0; i < forecastObj.list.length; i++) {
     var forecastCard = document.createElement('div');
     forecastCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
 
     var forecastBody = document.createElement('div');
     forecastBody.classList.add('card-body');
-    
+
     forecastCard.append(forecastBody);
 
     var weatherIconEl = document.createElement('img');
@@ -70,7 +72,7 @@ function displayFiveDayForecast(forecastObj) {
       '<li>Temperature:</li> ' + forecastObj.list[i].main.temp + '&#8451;<br/>' +
       '<li>Humidity:</li> ' + forecastObj.list[i].main.humidity + '%<br/>' +
       '<li>Wind Speed:</li> ' + forecastObj.list[i].wind.speed + ' m/s<br/>';
-    
+
     forecastBody.append(forecastContentEl, weatherIconEl);
     forecastContainer.append(forecastCard);
   }
@@ -83,7 +85,6 @@ function searchApi(query, appid) {
   if (!localQueryUrl.includes('appid=')) {
     localQueryUrl = localQueryUrl + '&appid=' + appid;
   }
-
 
   fetch(localQueryUrl)
     .then(function (response) {
@@ -105,7 +106,6 @@ function searchApi(query, appid) {
 
         var fiveDayForecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + query + '&cnt=5' + '&appid=' + appid;
 
-
         fetch(fiveDayForecastUrl)
           .then(function (response) {
             if (!response.ok) {
@@ -122,10 +122,39 @@ function searchApi(query, appid) {
             console.log(error);
           });
       }
+
+      // Add search input to search history
+      addSearchHistory(query);
     })
     .catch(function (error) {
       console.error(error);
     });
+}
+
+function addSearchHistory(query) {
+  var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+  // Check if the city already exists in the search history
+  if (searchHistory.includes(query)) {
+    return; // Don't add it again
+  }
+
+  searchHistory.push(query);
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+  renderSearchHistory();
+}
+
+
+function renderSearchHistory() {
+  searchHistoryEl.innerHTML = '';
+  var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+  for (var i = searchHistory.length - 1; i >= 0; i--) {
+    var searchItemEl = document.createElement('li');
+    searchItemEl.textContent = searchHistory[i];
+    searchItemEl.classList.add('search-history-item'); // Add a class for styling
+    searchHistoryEl.appendChild(searchItemEl);
+  }
 }
 
 function handleSearchFormSubmit(event) {
@@ -136,10 +165,22 @@ function handleSearchFormSubmit(event) {
   if (!searchInputVal) {
     console.error('You need a search input value!');
     return;
+  }
 
-  };
+  searchApi(searchInputVal, apiKey);
+}
+
+function handleSearchHistoryItemClick(event) {
+  var clickedItem = event.target;
+  var searchQuery = clickedItem.textContent;
+
+  searchApi(searchQuery, apiKey);
 }
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
+searchHistoryEl.addEventListener('click', handleSearchHistoryItemClick);
+
+// Load search history on page load
+renderSearchHistory();
 
 getParams();

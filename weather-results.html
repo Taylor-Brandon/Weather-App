@@ -21,23 +21,27 @@
           <h2> Search For A City: </h2>
           <form id="search-form" class="d-flex" role="search">
             <input class="form-control me-2" id="search-input" type="search" placeholder="New York" aria-label="Search">
+            <button type="submit" class="btn btn-outline-primary">Search</button> <!-- Search button -->
           </form>
         </div>
       </div>
       <div class="col-6">
         <div id="buttons" class="box">
-          <button type="submit" class="btn btn-outline-primary">Search</button>
           <a href="./index.html" class="btn btn-block btn-danger">&larr; Go back.</a>
+          <h2>Search History:</h2>
+<ul id="search-history"></ul>
+
         </div>
       </div>
     </div>
-  <div class="col-12 col-md-9 p-3 text-light">
-    <h2>Showing results for... <span id="result-text"></span></h2>
-    <div id="result-content"></div>
-  </div>
+    <div class="col-12 col-md-9 p-3 text-light">
+      <h2 class="result-heading">Showing results for... <span id="result-text"></span></h2>
+      <div id="result-content"></div>
+    </div>
   </div>
 
   <script src="./js/results.js"></script>
 </body>
 
 </html>
+

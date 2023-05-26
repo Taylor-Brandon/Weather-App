@@ -10,7 +10,7 @@ function handleSearchFormSubmit(event) {
         alert('You have not searched for a city!');
         return;
     }
-
+    
     var queryString = './weather-results.html?q=' + searchInputVal + '&appid=' + apiKey;
 
     location.assign(queryString);

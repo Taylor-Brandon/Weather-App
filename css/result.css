@@ -5,6 +5,11 @@ nav {
     color: aliceblue;
 
 }
+.result-heading {
+    color: #000; 
+    font-weight: bold; 
+  }
+
 h2{
     margin-left: -50px;
     color: black;
