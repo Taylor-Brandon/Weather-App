@@ -32,3 +32,16 @@ button {
     margin-top: 100px;
     margin-left: -270px;
 }
+.search-section {
+    margin-left: 10px;
+}
+.search-history-item {
+    border-radius: 5px;
+    background-color: rgb(188, 185, 185);
+    padding: 15px;
+    width: 400px;
+    height: 45px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+}
